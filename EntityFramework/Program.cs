@@ -1,4 +1,6 @@
-﻿namespace EntityFramework;
+﻿using EntityFramework.ModeloDB;
+
+namespace EntityFramework;
 
 class Program
 {
@@ -15,6 +17,13 @@ class Program
         // nos crea la carpeta migrations, que contiene lo que se ejecutara en la parte de migraciones
         
         // usamos este comando " dotnet ef database update " para que se haga el cambio en la DB
+
+        var DBContext = new DataBaseContext();
+
+        DBContext.Productos.Add( new Producto { Nombre = "Producto 1", Precio = 10.1m ,Proveedor = "proveedor 1"} );
+        DBContext.Productos.Add( new Producto { Nombre = "Product 2", Precio = 20.1m ,Proveedor = "proveedor 2"} );
+
+        DBContext.SaveChanges(); // esto es para 
         Console.WriteLine("Hello, World!");
     }
 }
