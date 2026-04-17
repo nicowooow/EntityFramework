@@ -9,6 +9,8 @@ class Program
         
         // construimos el proyecto con " dotnet build "
         // instalamos la herramienta de dotnet-ef con " dotnet tool install --global dotnet-ef "
+        
+        // hay que estar en la carpeta que contiene el .csproj
         //  hacemos el " dotnet ef migrations add (nombre de la migracion) " que nos dice haga las migraciones en c#
         // nos crea la carpeta migrations, que contiene lo que se ejecutara en la parte de migraciones
         Console.WriteLine("Hello, World!");
