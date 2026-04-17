@@ -5,6 +5,8 @@ namespace EntityFramework.ModeloDB;
 public class DataBaseContext:DbContext // contexto para usar la DB 
 {
     public DbSet<Producto> Productos { get; set; } // la clase a la que hace referencia la DB
+    public DbSet<Estudiante> Estudiantes { get; set; } 
+    public DbSet<Direccion> Direccions { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
