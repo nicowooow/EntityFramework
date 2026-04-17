@@ -23,7 +23,7 @@ class Program
         DBContext.Productos.Add( new Producto { Nombre = "Producto 1", Precio = 10.1m ,Proveedor = "proveedor 1"} );
         DBContext.Productos.Add( new Producto { Nombre = "Product 2", Precio = 20.1m ,Proveedor = "proveedor 2"} );
 
-        DBContext.SaveChanges(); // esto es para 
+        DBContext.SaveChanges(); // esto es para guardar los cambios que se hicieron
         Console.WriteLine("Hello, World!");
     }
 }
