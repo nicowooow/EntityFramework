@@ -19,15 +19,22 @@ class Program
         // usamos este comando " dotnet ef database update " para que se haga el cambio en la DB
 
         var DBContext = new DataBaseContext();
-/*
-        DBContext.Productos.Add( new Producto { Nombre = "Producto 1", Precio = 10.1m } );
-        DBContext.Productos.Add( new Producto { Nombre = "Product 2", Precio = 20.1m } );
+        
+        /*
+        DBContext.Productos.Add( new Producto { Nombre = "Producto 1", Cantidad = 60 } );
+        DBContext.Productos.Add( new Producto { Nombre = "Product 2", Cantidad = 20 } );
         DBContext.SaveChanges(); // esto es para guardar los cambios que se hicieron
-*/
+        */
+        
+        
         Console.WriteLine("Hello, World!");
 
-        var listaProductos = DBContext.Productos.Where(p => p.Precio > 10);
+        var listaProductos = DBContext.Productos.Where(p => p.Cantidad > 10);
 
+        foreach (var producto in listaProductos)
+        {
+            Console.WriteLine($"producto {producto.Id} - {producto.Nombre} - {producto.Cantidad} - {producto.Precio}");
+        }
 
     }
 }
