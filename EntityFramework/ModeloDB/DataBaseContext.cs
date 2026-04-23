@@ -7,6 +7,7 @@ public class DataBaseContext:DbContext // contexto para usar la DB
     public DbSet<Producto> Productos { get; set; } // la clase a la que hace referencia la DB
     public DbSet<Estudiante> Estudiantes { get; set; } 
     public DbSet<Direccion> Direccions { get; set; } 
+    public DbSet<Curso> Cursos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -17,6 +18,20 @@ public class DataBaseContext:DbContext // contexto para usar la DB
             //.IsRequired() // lo ponemos como requerido
             .HasMaxLength(100) // que tenga un maximo de longitud
             ;
+
+        modelBuilder.Entity<Estudiante>()
+            .HasOne(e => e.Direccion) // el estudiante tiene una direccion
+            .WithOne(e => e.Estudiante) // y dicha direccion esta relacionada con un estudiante
+            .HasForeignKey<Direccion>(d=> d.EstudianteId) // la FK de Direccion tiene la FK con el Id del estudiate
+            ;
+        // .OnDelete(DeleteBehavior.NoAction)
+        ;
+
+        // modelBuilder.Entity<Estudiante>()
+        //     .HasOne(e => e.Curso) // decimos que 
+        //     .WithMany(e => e.Estudiantes)
+        //     .HasForeignKey(d => d.CursoId)
+        //     ;
     }
 
     // sobre escribimos el OnConfiguring

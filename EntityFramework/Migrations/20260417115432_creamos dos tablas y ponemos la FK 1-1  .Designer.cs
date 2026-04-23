@@ -2,6 +2,7 @@
 using EntityFramework.ModeloDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,27 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFramework.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20260417115432_creamos dos tablas y ponemos la FK 1-1  ")]
+    partial class creamosdostablasyponemoslaFK11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.6");
-
-            modelBuilder.Entity("EntityFramework.ModeloDB.Curso", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cursos");
-                });
 
             modelBuilder.Entity("EntityFramework.ModeloDB.Direccion", b =>
                 {
@@ -66,9 +54,6 @@ namespace EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CursoId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("DireccionId")
                         .HasColumnType("INTEGER");
 
@@ -77,8 +62,6 @@ namespace EntityFramework.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
 
                     b.ToTable("Estudiantes");
                 });
@@ -117,22 +100,6 @@ namespace EntityFramework.Migrations
                         .IsRequired();
 
                     b.Navigation("Estudiante");
-                });
-
-            modelBuilder.Entity("EntityFramework.ModeloDB.Estudiante", b =>
-                {
-                    b.HasOne("EntityFramework.ModeloDB.Curso", "Curso")
-                        .WithMany("Estudiantes")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
-                });
-
-            modelBuilder.Entity("EntityFramework.ModeloDB.Curso", b =>
-                {
-                    b.Navigation("Estudiantes");
                 });
 
             modelBuilder.Entity("EntityFramework.ModeloDB.Estudiante", b =>
