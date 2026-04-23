@@ -33,6 +33,25 @@ public class DataBaseContext:DbContext // contexto para usar la DB
         //     .WithMany(e => e.Estudiantes)
         //     .HasForeignKey(d => d.CursoId)
         //     ;
+
+        
+        // con has key decimos que tome como PKs el id del curso y del aula
+        modelBuilder.Entity<Aula_Curso>()
+            .HasKey(ac => new { ac.IdAula, ac.IdCurso })
+            ;
+
+        // al ser una relacion NM tenemos que definir dos relaciones 1:N
+        // tanto para la parte de curso y la parte de aula 
+        modelBuilder.Entity<Aula_Curso>()
+            .HasOne(a => a.Curso)
+            .WithMany(a => a.AulaCursos)
+            .HasForeignKey(ac => ac.IdCurso);
+        
+        modelBuilder.Entity<Aula_Curso>()
+            .HasOne(a => a.Aula)
+            .WithMany(a => a.AulaCursos)
+            .HasForeignKey(ac => ac.IdAula);
+        
     }
 
     // sobre escribimos el OnConfiguring
