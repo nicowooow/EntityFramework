@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EntityFramework.ModeloDB;
 
 public class Profesor
@@ -7,5 +9,7 @@ public class Profesor
     public string Apellidos { get; set; }
 
     // public int IdCurso { get; set; }
+    
+    // [InverseProperty("Profesor")] // mapea a la clase profesor
     public IList<Curso> Cursos { get; set; }
 }

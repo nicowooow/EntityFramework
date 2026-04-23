@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EntityFramework.ModeloDB;
 
 public class Curso
@@ -11,6 +13,8 @@ public class Curso
     
     // relacion de cursos a profesor, se necesita saber el id del profesor para cada curso
     public int ProfesorId { get; set; }
+    // [ForeignKey("ProfesorId")] // ponemos en que propiedad se hara la FK
+    // [InverseProperty("Curso")] // el lugar de donde lo estamos mapeando 
     public IList<Profesor>  Profesores { get; set; }
     
 }

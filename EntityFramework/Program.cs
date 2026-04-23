@@ -61,12 +61,38 @@ class Program
         var estudiante3 = new Estudiante { Nombre = "C", Apellido = "C", DireccionId = 0,Curso =  Curso2 };
         var estudiante4 = new Estudiante { Nombre = "D", Apellido = "D", DireccionId = 0,Curso =  Curso1 };
         
+        /*
         DBContext.Estudiantes.Add(estudiante1);
         DBContext.Estudiantes.Add(estudiante2);
         DBContext.Estudiantes.Add(estudiante3);
         DBContext.Estudiantes.Add(estudiante4);
         DBContext.SaveChanges();
+        */
 
+        
+        // con el include hacemos que traiga los datos de una tabla dentro de su objeto y
+        // thenInclude es para hacer lo mismo del include pero tomando como punto de inicio la tabla incluida anteriormente
+        var estudiantes_profesor = DBContext.Estudiantes.Include(e=> e.Curso).ThenInclude(c=> c.Profesores).Where(e=> e.Curso.Profesores.Any(p=> p.Nombre == "luis"));
 
+        
+        foreach (var estudiante_profesor in estudiantes_profesor)
+        {
+            Console.WriteLine($"estudiante {estudiante_profesor.Id} - {estudiante_profesor.Nombre} - {estudiante_profesor.CursoId}");
+        }
+        
+        // no se porque no me funciona esto... pero lo dejo comentado
+        // var cursos_luis = DBContext.Cursos.Where(c=> c.Profesores.Any(p=> p.Nombre == "luis"));
+        //
+        // foreach (var curso in cursos_luis)
+        // {
+        //     Console.WriteLine($"profesor luis {curso.Id} - {curso.Nombre} ");
+        // }
+        
+        var profesoresMatematicas = DBContext.Profesores.Where(p=> p.Cursos.Any(c=> c.Nombre == "Matematicas"));
+        
+        foreach (var profesor in profesoresMatematicas)
+        {
+            Console.WriteLine($"profesor de mates {profesor.Id} - {profesor.Nombre} ");
+        }
     }
 }

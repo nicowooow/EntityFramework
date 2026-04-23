@@ -8,6 +8,7 @@ public class DataBaseContext:DbContext // contexto para usar la DB
     public DbSet<Estudiante> Estudiantes { get; set; } 
     public DbSet<Direccion> Direccions { get; set; } 
     public DbSet<Curso> Cursos { get; set; }
+    public DbSet<Profesor> Profesores { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
