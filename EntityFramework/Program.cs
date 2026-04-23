@@ -1,4 +1,5 @@
 ﻿using EntityFramework.ModeloDB;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntityFramework;
 
@@ -34,6 +35,20 @@ class Program
         foreach (var producto in listaProductos)
         {
             Console.WriteLine($"producto {producto.Id} - {producto.Nombre} - {producto.Cantidad} - {producto.Precio}");
+        }
+
+        
+        /*
+        DBContext.Estudiantes.Add(new Estudiante{Nombre = "Juan", Apellido = "lopez", DireccionId = 1, Curso = new Curso{Nombre =  "Curso1"}});
+        DBContext.SaveChanges();
+
+        */
+        
+        var estudiantesCurso = DBContext.Estudiantes.Include(i=> i.Curso).Where(e => e.Curso.Nombre == "Curso1");
+        
+        foreach (var estudiante in estudiantesCurso)
+        {
+            Console.WriteLine($"estudiante {estudiante.Id} - {estudiante.Nombre} - {estudiante.CursoId}");
         }
 
     }
